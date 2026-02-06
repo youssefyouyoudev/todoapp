@@ -41,7 +41,7 @@
 			</div>
 			<div class="field">
 				<label for="due_date">Due Date</label>
-				<input id="due_date" type="date" name="due_date" value="{{ old('due_date', $task->due_date ? \\Carbon\\Carbon::parse($task->due_date)->format('Y-m-d') : '') }}">
+				<input id="due_date" type="date" name="due_date" value="{{ old('due_date', $task->due_date ? \Carbon\Carbon::parse($task->due_date)->format('Y-m-d') : '') }}">
 			</div>
 		</div>
 		<div class="actions" style="justify-content:flex-end;">

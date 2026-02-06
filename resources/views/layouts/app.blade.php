@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Do It — Tasks</title>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<style>
 		:root {
 			--bg: #0f1629;
@@ -30,6 +31,7 @@
 						var(--bg);
 			color: var(--text);
 			min-height: 100vh;
+			overflow-x: hidden;
 		}
 
 		a { color: inherit; text-decoration: none; }
@@ -207,6 +209,7 @@
 		.btn:hover { transform: translateY(-1px); box-shadow: 0 12px 30px rgba(76, 141, 255, 0.25); }
 		.btn.secondary { background: transparent; border-color: rgba(255, 255, 255, 0.1); color: var(--text); }
 		.btn.danger { background: transparent; border-color: rgba(255, 123, 123, 0.4); color: #ff9f9f; }
+		.btn:focus-visible { outline: 2px solid var(--primary-2); outline-offset: 2px; }
 
 		form.inline { display: inline; }
 
@@ -242,6 +245,18 @@
 			font-size: 13px;
 		}
 
+		.board { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+		.column { background: var(--panel); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); display: grid; gap: 10px; }
+		.column-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+		.column-title { font-weight: 700; letter-spacing: 0.01em; }
+		.column-count { padding: 6px 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.06); color: var(--muted); font-size: 12px; }
+		.drop-zone { min-height: 80px; display: grid; gap: 10px; }
+		.drop-zone.empty::before { content: "Drop tasks here"; color: var(--muted); font-size: 12px; border: 1px dashed rgba(255, 255, 255, 0.1); padding: 12px; border-radius: var(--radius-sm); text-align: center; }
+		.drop-zone.drop-active { outline: 1px dashed var(--primary); outline-offset: 4px; }
+		.kanban-card { cursor: grab; transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease; }
+		.kanban-card.dragging { opacity: 0.65; transform: scale(0.99); box-shadow: 0 16px 34px rgba(0, 0, 0, 0.4); }
+		.softer { color: var(--muted); font-size: 12px; }
+
 		@media (max-width: 980px) {
 			.shell { grid-template-columns: 1fr; }
 			.sidebar { flex-direction: row; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 2; }
@@ -257,6 +272,10 @@
 			<div class="brand">DO IT.</div>
 			<div class="nav-group">
 				<div class="nav-label">Navigate</div>
+				<a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+					<span class="nav-dot"></span>
+					Dashboard
+				</a>
 				<a href="{{ route('tasks.index') }}" class="nav-link {{ request()->routeIs('tasks.index') ? 'active' : '' }}">
 					<span class="nav-dot"></span>
 					Tasks

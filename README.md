@@ -4,14 +4,17 @@ A sleek task manager built with Laravel and Blade, styled to mimic a modern dash
 
 ## Features
 - Task CRUD with statuses: `pending`, `in_progress`, `completed`
+- Drag-and-drop kanban board with inline AJAX status updates
+- Dashboard with Chart.js (monthly trend) and year/month/day stats
 - Due date tracking and friendly formatting
 - Flash success + validation error messaging
 - Dark, dashboard-inspired UI (inline CSS in Blade layout)
 - Summary stats for completed and in-progress tasks
 
 ## Stack
-- PHP 8.2+ / Laravel 11
+- PHP 8.2+ / Laravel 12
 - Blade views (inline styles, no external CSS required)
+- Chart.js via CDN on the dashboard
 - Vite + npm for asset bundling (optional if you rebuild assets)
 - Pest/PHPUnit for testing
 

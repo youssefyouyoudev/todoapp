@@ -21,7 +21,7 @@
 			<span class="status {{ $task->status }}">{{ str_replace('_', ' ', $task->status) }}</span>
 		</div>
 		<div class="task-row" style="margin-top: 12px;">
-			<div class="badge">Due {{ $task->due_date ? \\Carbon\\Carbon::parse($task->due_date)->format('M d, Y') : 'Flexible' }}</div>
+			<div class="badge">Due {{ $task->due_date ? \Carbon\Carbon::parse($task->due_date)->format('M d, Y') : 'Flexible' }}</div>
 			<div class="muted">Created {{ $task->created_at->format('M d, Y h:i A') }}</div>
 		</div>
 	</div>
